@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>图书管理系统</title>
+</head>
+<body>
+    <h1>图书管理系统</h1>
+    <form action="/add" method="post">
+        <label for="title">书名:</label><br>
+        <input type="text" id="title" name="title"><br>
+        <label for="author">作者:</label><br>
+        <input type="text" id="author" name="author"><br>
+        <label for="year">出版年份:</label><br>
+        <input type="text" id="year" name="year"><br><br>
+        <input type="submit" value="添加书籍">
+    </form>
+    <h2>所有书籍</h2>
+    <ul>
+        {{range .}}
+        <li>
+            <strong>{{.Title}}</strong> by {{.Author}} ({{.Year}})
+            <a href="/delete?id={{.ID}}">删除</a>
+            <a href="/edit?id={{.ID}}">编辑</a>
+        </li>
+        {{end}}
+    </ul>
+</body>
+</html>
