@@ -1,27 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>图书管理系统</title>
+    <title>图书搜索结果</title>
 </head>
 <body>
-    <h1>图书管理系统</h1>
-    <form action="/add" method="post">
-        <label for="title">书名:</label><br>
-        <input type="text" id="title" name="title"><br>
-        <label for="author">作者:</label><br>
-        <input type="text" id="author" name="author"><br>
-        <label for="year">出版年份:</label><br>
-        <input type="text" id="year" name="year"><br><br>
-        <input type="submit" value="添加书籍">
-    </form>
-
+    <h1>图书搜索结果</h1>
     <form action="/search" method="get">
         <label for="query">搜索图书:</label><br>
-        <input type="text" id="query" name="query"><br><br>
+        <input type="text" id="query" name="query" value="{{.Query}}"><br><br>
         <input type="submit" value="搜索">
     </form>
-
-    <h2>所有书籍</h2>
+    <h2>搜索结果</h2>
     <table border="1">
         <tr>
             <th>书名</th>
@@ -29,7 +18,7 @@
             <th>出版年份</th>
             <th>操作</th>
         </tr>
-        {{range .}}
+        {{range .Books}}
         <tr>
             <td>{{.Title}}</td>
             <td>{{.Author}}</td>
@@ -41,5 +30,6 @@
         </tr>
         {{end}}
     </table>
+    <a href="/">返回所有书籍列表</a>
 </body>
 </html>
