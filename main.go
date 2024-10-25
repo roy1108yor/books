@@ -39,6 +39,7 @@ func main() {
     http.HandleFunc("/add", addBook)
     http.HandleFunc("/delete", deleteBook)
     http.HandleFunc("/edit", editBook)
+    http.HandleFunc("/login", handleLogin)
     http.HandleFunc("/update", updateBook)
     http.HandleFunc("/search", searchBooks)
     http.HandleFunc("/book", showBook)
