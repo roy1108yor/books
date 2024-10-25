@@ -10,8 +10,8 @@
         <input type="text" id="title" name="title"><br>
         <label for="author">作者:</label><br>
         <input type="text" id="author" name="author"><br>
-        <label for="year">出版年份:</label><br>
-        <input type="text" id="year" name="year"><br><br>
+        <label for="publication_date">出版年月日:</label><br>
+        <input type="date" id="publication_date" name="publication_date"><br><br>
         <input type="submit" value="添加书籍">
     </form>
 
@@ -26,14 +26,14 @@
         <tr>
             <th>书名</th>
             <th>作者</th>
-            <th>出版年份</th>
+            <th>出版年月日</th>
             <th>操作</th>
         </tr>
         {{range .}}
         <tr>
             <td>{{.Title}}</td>
             <td>{{.Author}}</td>
-            <td>{{.Year}}</td>
+            <td>{{.PublicationDate}}</td>
             <td>
                 <a href="/delete?id={{.ID}}">删除</a> |
                 <a href="/edit?id={{.ID}}">编辑</a>

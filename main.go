@@ -11,10 +11,10 @@ import (
 )
 
 type Book struct {
-    ID     int
-    Title  string
-    Author string
-    Year   int
+    ID              int
+    Title           string
+    Author          string
+    PublicationDate string
 }
 
 type SearchResult struct {
@@ -50,10 +50,10 @@ func main() {
 // 初始化数据库并创建表
 func initDB() {
     createTableSQL := `CREATE TABLE IF NOT EXISTS books (
-        "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,		
+        "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         "title" TEXT,
         "author" TEXT,
-        "year" INTEGER
+        "publication_date" DATE
     );`
 
     log.Println("创建表books...")
@@ -64,7 +64,6 @@ func initDB() {
     statement.Exec()
     log.Println("表创建成功")
 }
-
 func listBooks(w http.ResponseWriter, r *http.Request) {
     rows, err := db.Query("SELECT id, title, author, year FROM books")
     if err != nil {
@@ -162,13 +161,9 @@ func updateBook(w http.ResponseWriter, r *http.Request) {
 
     title := r.FormValue("title")
     author := r.FormValue("author")
-    year, err := strconv.Atoi(r.FormValue("year"))
-    if err != nil {
-        http.Error(w, "无效的出版年份", http.StatusBadRequest)
-        return
-    }
+    publicationDate := r.FormValue("publication_date")
 
-    _, err = db.Exec("UPDATE books SET title = ?, author = ?, year = ? WHERE id = ?", title, author, year, id)
+    _, err = db.Exec("UPDATE books SET title = ?, author = ?, publication_date = ? WHERE id = ?", title, author, publicationDate, id)
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -179,7 +174,7 @@ func updateBook(w http.ResponseWriter, r *http.Request) {
 
 func searchBooks(w http.ResponseWriter, r *http.Request) {
     query := r.URL.Query().Get("query")
-    rows, err := db.Query("SELECT id, title, author, year FROM books WHERE title LIKE ? OR author LIKE ?", "%"+query+"%", "%"+query+"%")
+    rows, err := db.Query("SELECT id, title, author, publication_date FROM books WHERE title LIKE ? OR author LIKE ?", "%"+query+"%", "%"+query+"%")
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
@@ -189,7 +184,7 @@ func searchBooks(w http.ResponseWriter, r *http.Request) {
     var books []Book
     for rows.Next() {
         var book Book
-        if err := rows.Scan(&book.ID, &book.Title, &book.Author, &book.Year); err != nil {
+        if err := rows.Scan(&book.ID, &book.Title, &book.Author, &book.PublicationDate); err != nil {
             http.Error(w, err.Error(), http.StatusInternalServerError)
             return
         }
