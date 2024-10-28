@@ -5,4 +5,51 @@
 .nfs*
 node_modules
 
+# Clacky Env Files
+.1024feature-file
+*.dll
+.paas-unit-*
+.breakpoints
+core.*
+coverage/
+
+# System and Version Control Files
+.DS_Store
+Thumbs.db
+
+# Dependencies and Build Artifacts
+.pnpm-store/
+dist/
+env/
+venv/
+vendor/
+cython_debug/
+
+# Logs, Temporary, and Backup Files
+*.log
+*.tmp
+*.bak
+*.old
+*.pid
+*.seed
+*.pid.lock
+
+# Environment and Configuration Files
+.env
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Go
+*.exe
+*.out
+*.test
+
+# Database Files
+*.sqlite
+*.db
+*.sql
+*.sql-journal
+
 123
