@@ -1,19 +1,39 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
+
     <title>编辑书籍信息</title>
+
 </head>
+
 <body>
+
     <h1>编辑书籍信息</h1>
+
+    <button onclick="window.location.href='books.html'">返回主页</button>
+
     <form action="/update" method="post">
+
         <input type="hidden" id="id" name="id" value="{{.ID}}">
+
         <label for="title">书名:</label><br>
+
         <input type="text" id="title" name="title" value="{{.Title}}"><br>
+
         <label for="author">作者:</label><br>
+
         <input type="text" id="author" name="author" value="{{.Author}}"><br>
+
         <label for="year">出版年份:</label><br>
+
         <input type="text" id="year" name="year" value="{{.Year}}"><br><br>
+
         <input type="submit" value="更新书籍信息">
+
     </form>
+
 </body>
+
 </html>
